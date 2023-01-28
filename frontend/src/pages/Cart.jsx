@@ -3,6 +3,7 @@ import React, { useContext } from "react";
 import AuthContext from "../store/auth-context";
 import { Button } from "primereact/button";
 import CartContext from "../store/cart-context";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const ctx = useContext(CartContext);
@@ -50,7 +51,9 @@ const Cart = () => {
         {!authCtx.isLoggedIn ? (
           <Button disabled>Proceed to cheeckout</Button>
         ) : (
-          <Button>Proceed to cheeckout</Button>
+          <Button>
+            <Link to="/checkout">Procced to checkout</Link>
+          </Button>
         )}
       </div>
     </div>

@@ -3,6 +3,7 @@ const CartContext = React.createContext({
   cartItems: [],
   addItem: (item) => {},
   removeItem: (item) => {},
+  removeCartItems: () => {},
 });
 export default CartContext;
 
@@ -30,6 +31,11 @@ export const CartContextProvider = (props) => {
       setCartItems(items);
     }
   };
+
+  const deleteCart = () => {
+    setCartItems([]);
+  };
+
   const removeHandler = (item) => {
     const items = cartItems.slice();
     const productIndex = cartItems.findIndex((prod) => prod.id === item.id);
@@ -43,6 +49,7 @@ export const CartContextProvider = (props) => {
         cartItems: cartItems,
         addItem: addHandler,
         removeItem: removeHandler,
+        removeCartItems: deleteCart,
       }}
     >
       {props.children}
