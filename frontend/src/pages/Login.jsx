@@ -13,6 +13,21 @@ const Login = () => {
   const navigate = useNavigate();
   const ctx = useContext(AuthContext);
 
+  const getUserInfo = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/user/", {
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+      const user = await response.clone().json();
+
+      if (response.ok) {
+        ctx.saveUserInfo(user);
+      }
+    } catch (error) {
+      console.error(`Could not get user: ${error}`);
+    }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -28,6 +43,7 @@ const Login = () => {
       });
       if (response.ok) {
         ctx.onLogin();
+        getUserInfo();
         navigate("/");
       } else {
         const data = await response.json();
