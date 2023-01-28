@@ -2,8 +2,9 @@ import React, { useState } from "react";
 const CartContext = React.createContext({
   cartItems: [],
   addItem: (item) => {},
-  removeItem: (item) => {},
+  decreaseQuantity: (item) => {},
   removeCartItems: () => {},
+  deleteItem: (itemId) => {},
 });
 export default CartContext;
 
@@ -32,10 +33,6 @@ export const CartContextProvider = (props) => {
     }
   };
 
-  const deleteCart = () => {
-    setCartItems([]);
-  };
-
   const removeHandler = (item) => {
     const items = cartItems.slice();
     const productIndex = cartItems.findIndex((prod) => prod.id === item.id);
@@ -43,13 +40,25 @@ export const CartContextProvider = (props) => {
     if (items[productIndex].quantity == 0) items.splice(productIndex, 1);
     setCartItems(items);
   };
+
+  const deleteItemHandler = (itemId) => {
+    const items = cartItems.slice();
+    const productIndex = cartItems.findIndex((prod) => prod.id === itemId);
+    items.splice(productIndex, 1);
+    setCartItems(items);
+  };
+
+  const deleteCart = () => {
+    setCartItems([]);
+  };
   return (
     <CartContext.Provider
       value={{
         cartItems: cartItems,
         addItem: addHandler,
-        removeItem: removeHandler,
+        decreaseQuantity: removeHandler,
         removeCartItems: deleteCart,
+        deleteItem: deleteItemHandler,
       }}
     >
       {props.children}

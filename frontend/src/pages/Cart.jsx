@@ -1,3 +1,8 @@
+import {
+  AiFillMinusSquare,
+  AiFillPlusSquare,
+  AiOutlineDelete,
+} from "react-icons/ai";
 import React, { useContext } from "react";
 
 import AuthContext from "../store/auth-context";
@@ -23,26 +28,32 @@ const Cart = () => {
               <img className="w-24" src={item.image} alt="product-img" />
             </div>
             <div className="pl-4 flex flex-col justify-between justify-center  ">
-              <h3 className="front-bold text-xl font-bold">{item.name}</h3>
+              <h3 className="front-bold text-2xl">{item.name}</h3>
               <p className="text-sm loading-4 text-gray-500">
                 {item.description}
               </p>
-              <p className="">${item.price}</p>
+              <p>${item.price}</p>
 
               <div className="flex items-center">
-                <Button
-                  className="p-button-sm"
-                  onClick={() => ctx.removeItem(item)}
+                <div className="font-bold text-2xl cursor-pointer">
+                  <AiFillMinusSquare
+                    className="p-button-sm"
+                    onClick={() => ctx.decreaseQuantity(item)}
+                  />
+                </div>
+                <span className="px-2 ">{item.quantity}</span>
+                <div className="font-bold text-2xl cursor-pointer">
+                  <AiFillPlusSquare
+                    className="p-button-sm"
+                    onClick={() => ctx.addItem(item)}
+                  />
+                </div>
+                <p
+                  className="font-bold text-2xl m-2 cursor-pointer"
+                  onClick={() => ctx.deleteItem(item.id)}
                 >
-                  -
-                </Button>
-                <span className="px-2">{item.quantity}</span>
-                <Button
-                  className="p-button-sm"
-                  onClick={() => ctx.addItem(item)}
-                >
-                  +
-                </Button>
+                  <AiOutlineDelete />
+                </p>
               </div>
             </div>
           </div>
