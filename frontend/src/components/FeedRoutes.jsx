@@ -1,3 +1,4 @@
+import { OrderDetail, Orders } from "../pages";
 import { Route, Routes } from "react-router-dom";
 
 import Cart from "../pages/Cart";
@@ -14,6 +15,8 @@ const FeedRoutes = () => {
         <Route path="/product-detail/:productId" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/order-detail/:orderId" element={<OrderDetail />} />
       </Routes>
     </div>
   );

@@ -15,14 +15,20 @@ const Header = () => {
   };
   return (
     <header>
-      <div className="shadow-md py-2 bg-sky-500/50 ">
+      <div className="shadow-md py-2 bg-blue-500/70 ">
         <div className="px-6 w-full flex flex-wrap">
           <div className="p-2 flex flex-row items-center w-full justify-between">
             <div>
               <Link to="/" className="pr-2 lg:px-2 py-2 text-2xl font-bold">
                 Home
               </Link>
+
+              <Link to="/orders" className="pr-2 lg:px-5 py-2 text-2xl">
+                Orders
+              </Link>
             </div>
+            <div></div>
+
             <div className="flex flex-row items-center justify-center gap-6 text-l">
               <div>
                 {ctx.isLoggedIn ? (
