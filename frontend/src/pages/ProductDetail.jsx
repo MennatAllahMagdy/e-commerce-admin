@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Button } from "primereact/button";
+import CartContext from "../store/cart-context";
 import { products } from "../data/productsData";
 import { useParams } from "react-router-dom";
 
 const ProductDetail = () => {
   const [productItem, setProductItem] = useState(null);
   const { productId } = useParams();
-
+  const ctx = useContext(CartContext);
   useEffect(() => {
     const productDetails = products.find((item) => item.id === productId);
     setProductItem(productDetails);
@@ -30,7 +31,10 @@ const ProductDetail = () => {
           <p className="text-2xl font-bold">
             ${productItem && productItem.price}
           </p>
-          <Button className=" opacity-70  hover:opacity-100 hover:shadow-md outlined-none">
+          <Button
+            className=" opacity-70  hover:opacity-100 hover:shadow-md outlined-none"
+            onClick={() => ctx.addItem(productItem)}
+          >
             Add to cart
           </Button>
         </div>
